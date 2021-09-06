@@ -1,6 +1,5 @@
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class RationalTest {
     @Test
@@ -12,6 +11,6 @@ public class RationalTest {
         y.numerator = 1;
         y.denominator = 4;
         x.add(y);
-        assertEquals(3, x.numerator);
+        Assert.assertEquals(3, x.numerator);
     }
 }
