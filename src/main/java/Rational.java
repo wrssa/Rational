@@ -10,10 +10,13 @@ class Rational {
 
     Rational() {
         // to be completed
+        super();
     }
 
     Rational(long numerator, long denominator) throws Illegal { 
         // to be completed
+        this.numerator = numerator;
+        this.denominator = denominator;
     } 
 
     // find the reduce form 
@@ -46,6 +49,9 @@ class Rational {
      */
     public void subtract(Rational x) {
         // to be completed
+        numerator = (numerator * x.denominator) - (x.numerator * denominator);
+        denominator = (denominator * x.denominator);
+        simplestForm();
     }
 
     /***
@@ -54,6 +60,9 @@ class Rational {
      */
     public void multiply(Rational x) { 
         // to be completed
+        numerator = numerator * x.numerator;
+        denominator = denominator * x.denominator;
+        simplestForm();
     }
 
     /***
@@ -62,6 +71,14 @@ class Rational {
      */
     public void divide(Rational x) {
         // to be completed
+        long tmp = x.denominator;
+        x.denominator = x.numerator;
+        x.numerator = tmp;
+
+        numerator = numerator * x.numerator;
+        denominator = denominator * x.denominator;
+        simplestForm();
+
     }
 
     /***
@@ -71,7 +88,14 @@ class Rational {
      */
     public boolean equals(Object x) {
         // to be completed
-        return true; // TODO: This needs to be modified.
+        Rational k = (Rational) x;
+        simplestForm();
+        k.simplestForm();
+
+        if(numerator == k.numerator && denominator == k.denominator){
+            return true;
+        }
+        return false; // TODO: This needs to be modified.
     }
 
     /***
@@ -82,7 +106,24 @@ class Rational {
      */
     public long compareTo(Object x) {
         // to be completed
-        return -1; // TODO: this needs to be modified.
+        //compare this object to object x
+        Rational k = (Rational) x;
+        simplestForm();
+        k.simplestForm();
+
+        numerator = numerator * k.denominator;
+        denominator = denominator * k.denominator;
+        k.numerator = k.numerator * denominator;
+        k.denominator = k.denominator * denominator;
+
+        if(numerator < k.numerator){
+            return -1;
+        }else if(numerator == k.numerator){
+            return 0;
+        }else if(numerator > k.numerator){
+            return  1;
+        }
+        return 404;
     }
 
     /***
@@ -91,10 +132,11 @@ class Rational {
      */
     public String toString() { 
         // to be completed
-        return ""; // TODO: This needs to be modified.
+        return numerator+"/"+denominator;
     }
 
     public static void main(String[] args) {
+
         System.out.println("This is Rational class.");
     }
 }
